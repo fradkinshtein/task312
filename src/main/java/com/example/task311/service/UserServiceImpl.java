@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
+    @Override
+    @Transactional
+    public void save(User user) {
+        userRepository.save(user);
+    }
 
     @Override
     @Transactional
@@ -37,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
@@ -50,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User findById(long id) {
+    public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 

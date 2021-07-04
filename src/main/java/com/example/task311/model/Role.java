@@ -1,10 +1,11 @@
 package com.example.task311.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

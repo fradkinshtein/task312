@@ -20,7 +20,7 @@ public class UserController {
 
 
     @GetMapping("/admin/list_users")
-    public String viewUsersList(Model model, Principal principal) {
+    public String viewUsersList(@ModelAttribute("user") User user, Model model, Principal principal) {
         model.addAttribute("allUsers", userService.findAllUsers());
         model.addAttribute("allRoles", userService.findAllRoles());
         model.addAttribute("currentUser", userService.findByUsername(principal.getName()));
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("admin/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model, Principal principal) {
+    public String showUpdateForm(@PathVariable("id")Long id, Model model, Principal principal) {
         model.addAttribute("allRoles", userService.findAllRoles());
         model.addAttribute("userRoles", userService.getRoleById(id));
         model.addAttribute("user", userService.findById(id));
@@ -68,8 +68,21 @@ public class UserController {
     }
 
     @GetMapping("admin/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
+        return "redirect:/admin/list_users";
+    }
+
+    @GetMapping("/admin/getOne")
+    @ResponseBody
+    public User getOne(Long id) {
+        return userService.findById(id);
+    }
+
+    @PostMapping("/save")
+    public String save(User user) {
+
+        userService.updateUser(user);
         return "redirect:/admin/list_users";
     }
 }
