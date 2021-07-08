@@ -12,8 +12,8 @@ public interface UserService {
     void deleteById(Long id);
     User findById(Long id);
     List<User> findAllUsers();
-    List<Role> findAllRoles();
-    Role getRoleById(Long id);
-    void setRolesToUser(User user, Long[] roles);
-    void save(User user);
+//    List<Role> findAllRoles();
+//    Role getRoleById(Long id);
+//    void setRolesToUser(User user, Long[] roles);
+
 }

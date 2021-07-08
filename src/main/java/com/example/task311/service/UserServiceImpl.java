@@ -16,20 +16,16 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    //private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
-                           RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+       // this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
-    @Override
-    @Transactional
-    public void save(User user) {
-        userRepository.save(user);
-    }
+
 
     @Override
     @Transactional
@@ -71,25 +67,25 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
-    @Override
-    @Transactional
-    public List<Role> findAllRoles() {
-        return roleRepository.findAll();
-    }
+//    @Override
+//    @Transactional
+//    public List<Role> findAllRoles() {
+//        return roleRepository.findAll();
+//    }
+//
+//    @Override
+//    @Transactional
+//    public Role getRoleById(Long id) {
+//        return roleRepository.getOne(id);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void setRolesToUser(User user, Long[] roles) {
+//        Set<Role> roleList = new HashSet<>();
+//        for (Long id : roles) {
+//            roleList.add(roleRepository.findById(id).orElse(null));
+//        }
+//        user.setRoles(roleList);
 
-    @Override
-    @Transactional
-    public Role getRoleById(Long id) {
-        return roleRepository.getOne(id);
-    }
-
-    @Override
-    @Transactional
-    public void setRolesToUser(User user, Long[] roles) {
-        Set<Role> roleList = new HashSet<>();
-        for (Long id : roles) {
-            roleList.add(roleRepository.findById(id).orElse(null));
-        }
-        user.setRoles(roleList);
-    }
 }
